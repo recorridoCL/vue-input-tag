@@ -50,8 +50,8 @@
         if (tag && this.tags.indexOf(tag) === -1 && this.validateIfNeeded(tag)) {
           this.tags.push(tag)
           this.tagChange()
-          if (event.key) {
-            console.log(event.key)
+          if (event.key === ',' || event.key === 'Enter') {
+            event.preventDefault()
           }
         }
         this.newTag = ''
@@ -94,7 +94,7 @@
       <span>{{ tag }}</span>
       <a v-if="!readOnly" @click.prevent.stop="remove(index)" class="remove"></a>
     </span>
-    <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.188.tab.prevent.stop="addNew(event, newTag)" class="new-tag"/>
+    <input v-if="!readOnly" v-bind:placeholder="placeholder" type="text" v-model="newTag" v-on:keydown.delete.stop="removeLastTag()" v-on:keydown.enter.188.tab.stop="addNew($event, newTag)" class="new-tag"/>
   </div>
 
 </template>
